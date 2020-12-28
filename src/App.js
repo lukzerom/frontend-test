@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "antd/dist/antd.css";
+import firebase from "firebase/app";
+import "firebase/auth";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { firebaseConfig } from "./config/firebase";
+import AddPlant from "./Pages/AddPlant";
+import Login from "./Pages/Login";
+import Plants from "./Pages/Plants";
 
-function App() {
+firebase.initializeApp(firebaseConfig);
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route path="/add" component={AddPlant} />
+        </Switch>
+      </Router>
+      <Plants />
     </div>
   );
-}
+};
 
 export default App;
